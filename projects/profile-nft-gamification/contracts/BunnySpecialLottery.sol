@@ -3,14 +3,14 @@ pragma solidity ^0.6.12;
 
 import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
 
-import {IPancakeSwapLottery} from "lottery/contracts/interfaces/IPancakeSwapLottery.sol";
+import {IWinTnieLottery} from "lottery/contracts/interfaces/IWinTnieLottery.sol";
 import {BunnyMintingStation} from "./BunnyMintingStation.sol";
 import {PancakeProfile} from "./PancakeProfile.sol";
 
 contract BunnySpecialLottery is Ownable {
     /*** Contracts ***/
 
-    IPancakeSwapLottery public pancakeSwapLottery;
+    IWinTnieLottery public wintnieLottery;
     BunnyMintingStation public bunnyMintingStation;
     PancakeProfile public pancakeProfile;
 
@@ -43,7 +43,7 @@ contract BunnySpecialLottery is Ownable {
     /*** Constructor ***/
 
     constructor(
-        address _pancakeSwapLotteryAddress,
+        address _wintnieLotteryAddress,
         address _bunnyMintingStationAddress,
         address _pancakeProfileAddress,
         uint256 _endBlock,
@@ -59,7 +59,7 @@ contract BunnySpecialLottery is Ownable {
         uint256 _startLotteryRound,
         uint256 _finalLotteryRound
     ) public {
-        pancakeSwapLottery = IPancakeSwapLottery(_pancakeSwapLotteryAddress);
+        wintnieLottery = IWinTnieLottery(_wintnieLotteryAddress);
         bunnyMintingStation = BunnyMintingStation(_bunnyMintingStationAddress);
         pancakeProfile = PancakeProfile(_pancakeProfileAddress);
 
@@ -232,14 +232,14 @@ contract BunnySpecialLottery is Ownable {
 
         if (_bunnyId == nftId1) {
             uint256 size;
-            (, , , size) = pancakeSwapLottery.viewUserInfoForLotteryId(_userAddress, _lotteryId, 0, 1);
+            (, , , size) = wintnieLottery.viewUserInfoForLotteryId(_userAddress, _lotteryId, 0, 1);
             return size > 0;
         }
         if (_bunnyId == nftId2) {
             bool[] memory ticketStatuses;
             uint256 size;
 
-            (, , ticketStatuses, size) = pancakeSwapLottery.viewUserInfoForLotteryId(
+            (, , ticketStatuses, size) = wintnieLottery.viewUserInfoForLotteryId(
                 _userAddress,
                 _lotteryId,
                 _cursor,

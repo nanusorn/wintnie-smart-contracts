@@ -44,8 +44,8 @@ contract("Lottery V2", ([alice, bob, carol, david, erin, operator, treasury, inj
     // Deploy MockRandomNumberGenerator
     randomNumberGenerator = await MockRandomNumberGenerator.new({ from: alice });
 
-    // Deploy PancakeSwapLottery
-    lottery = await PancakeSwapLottery.new(mockCake.address, randomNumberGenerator.address, { from: alice });
+    // Deploy WinTnieLottery
+    lottery = await WinTnieLottery.new(mockCake.address, randomNumberGenerator.address, { from: alice });
 
     await randomNumberGenerator.setLotteryAddress(lottery.address, { from: alice });
   });

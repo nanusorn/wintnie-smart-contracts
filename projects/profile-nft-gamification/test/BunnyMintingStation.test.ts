@@ -29,7 +29,7 @@ const BnbPricePrediction = artifacts.require("predictions/contracts/BnbPricePred
 const MockAggregatorV3 = artifacts.require("test/MockAggregatorV3.sol");
 
 // LOTTERY
-const MockPancakeSwapLottery = artifacts.require("test/MockPancakeSwapLottery.sol");
+const MockWinTnieLottery = artifacts.require("test/MockWinTnieLottery.sol");
 
 contract("BunnyFactoryV3 and above", ([alice, bob, carol, david, eve, frank]) => {
   let anniversaryAchievement;
@@ -54,7 +54,7 @@ contract("BunnyFactoryV3 and above", ([alice, bob, carol, david, eve, frank]) =>
   let mockAggregatorV3;
   let bunnyPrediction;
 
-  let pancakeSwapLottery;
+  let wintnieLottery;
   let bunnySpecialLottery;
 
   let bunnySpecialAdmin;
@@ -162,7 +162,7 @@ contract("BunnyFactoryV3 and above", ([alice, bob, carol, david, eve, frank]) =>
 
     // LOTTERY
     mockBunnies = await MockBunnies.new({ from: alice });
-    pancakeSwapLottery = await MockPancakeSwapLottery.new(cake.address);
+    wintnieLottery = await MockWinTnieLottery.new(cake.address);
   });
 
   describe("All new contracts are deployed correctly", async () => {
@@ -1463,7 +1463,7 @@ contract("BunnyFactoryV3 and above", ([alice, bob, carol, david, eve, frank]) =>
 
       // Lottery setup
       bunnySpecialLottery = await BunnySpecialLottery.new(
-        pancakeSwapLottery.address,
+          wintnieLottery.address,
         bunnyMintingStation.address,
         pancakeProfile.address,
         currentBlockNumber + 10000,
@@ -1499,14 +1499,14 @@ contract("BunnyFactoryV3 and above", ([alice, bob, carol, david, eve, frank]) =>
         sender: alice,
       });
 
-      await pancakeSwapLottery.setOperatorAndTreasuryAndInjectorAddresses(alice, alice, alice, { from: alice });
+      await wintnieLottery.setOperatorAndTreasuryAndInjectorAddresses(alice, alice, alice, { from: alice });
 
       const _lengthLottery = new BN("60"); // In Sec
       const _priceTicketInCake = parseEther("0.1");
       const _discountDivisor = "2000";
       const _rewardsBreakdown = ["200", "300", "500", "1500", "2500", "5000"];
       const _treasuryFee = "2000";
-      await pancakeSwapLottery.startLottery(
+      await wintnieLottery.startLottery(
         new BN(await time.latest()).add(_lengthLottery),
         _priceTicketInCake,
         _discountDivisor,
@@ -1519,14 +1519,14 @@ contract("BunnyFactoryV3 and above", ([alice, bob, carol, david, eve, frank]) =>
       // carol played
       // david won
       // frank won without a profile
-      await pancakeSwapLottery.buyTickets(LOTTERY_ID, [1634660, 1999998], { from: carol });
-      await pancakeSwapLottery.buyTickets(LOTTERY_ID, [1634660, 1999999], { from: david });
-      await pancakeSwapLottery.buyTickets(LOTTERY_ID, [1999999], { from: frank });
+      await wintnieLottery.buyTickets(LOTTERY_ID, [1634660, 1999998], { from: carol });
+      await wintnieLottery.buyTickets(LOTTERY_ID, [1634660, 1999999], { from: david });
+      await wintnieLottery.buyTickets(LOTTERY_ID, [1999999], { from: frank });
 
-      await pancakeSwapLottery.closeLottery(LOTTERY_ID, { from: alice });
-      await pancakeSwapLottery.drawFinalNumberAndMakeLotteryClaimable(LOTTERY_ID, true, { from: alice });
-      await pancakeSwapLottery.claimTickets(LOTTERY_ID, ["3"], ["5"], { from: david });
-      await pancakeSwapLottery.claimTickets(LOTTERY_ID, ["4"], ["5"], { from: frank });
+      await wintnieLottery.closeLottery(LOTTERY_ID, { from: alice });
+      await wintnieLottery.drawFinalNumberAndMakeLotteryClaimable(LOTTERY_ID, true, { from: alice });
+      await wintnieLottery.claimTickets(LOTTERY_ID, ["3"], ["5"], { from: david });
+      await wintnieLottery.claimTickets(LOTTERY_ID, ["4"], ["5"], { from: frank });
     });
 
     it("Owner can whitelist for NFT3", async () => {

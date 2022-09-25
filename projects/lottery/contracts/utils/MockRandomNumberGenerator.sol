@@ -6,7 +6,7 @@ import "../interfaces/IRandomNumberGenerator.sol";
 import "../interfaces/IWinTnieLottery.sol";
 
 contract MockRandomNumberGenerator is IRandomNumberGenerator, Ownable {
-    address public pancakeSwapLottery;
+    address public wintnieLottery;
     uint32 public randomResult;
     uint256 public nextRandomResult;
     uint256 public latestLotteryId;
@@ -18,15 +18,15 @@ contract MockRandomNumberGenerator is IRandomNumberGenerator, Ownable {
     constructor() {}
 
     /**
-     * @notice Set the address for the PancakeSwapLottery
-     * @param _pancakeSwapLottery: address of the PancakeSwap lottery
+     * @notice Set the address for the WinTnieLottery
+     * @param _wintnieLottery: address of the PancakeSwap lottery
      */
-    function setLotteryAddress(address _pancakeSwapLottery) external onlyOwner {
-        pancakeSwapLottery = _pancakeSwapLottery;
+    function setLotteryAddress(address _wintnieLottery) external onlyOwner {
+        wintnieLottery = _wintnieLottery;
     }
 
     /**
-     * @notice Set the address for the PancakeSwapLottery
+     * @notice Set the address for the WinTnieLottery
      * @param _nextRandomResult: next random result
      */
     function setNextRandomResult(uint256 _nextRandomResult) external onlyOwner {
@@ -38,7 +38,7 @@ contract MockRandomNumberGenerator is IRandomNumberGenerator, Ownable {
      * @param _seed: seed provided by the PancakeSwap lottery
      */
     function getRandomNumber(uint256 _seed) external override {
-        require(msg.sender == pancakeSwapLottery, "Only PancakeSwapLottery");
+        require(msg.sender == wintnieLottery, "Only WinTnieLottery");
         fulfillRandomness(0, nextRandomResult);
     }
 
@@ -46,7 +46,7 @@ contract MockRandomNumberGenerator is IRandomNumberGenerator, Ownable {
      * @notice Change latest lotteryId to currentLotteryId
      */
     function changeLatestLotteryId() external {
-        latestLotteryId = IWinTnieLottery(pancakeSwapLottery).viewCurrentLotteryId();
+        latestLotteryId = IWinTnieLottery(wintnieLottery).viewCurrentLotteryId();
     }
 
     /**

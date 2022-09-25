@@ -37,9 +37,10 @@ contract TimeSeriesViewer {
         roundIds = new uint80[](numberRounds);
         prices = new int256[](numberRounds);
         timestamps = new uint256[](numberRounds);
+        starttimestamps = new uint256[](numberRounds);
 
         for (uint80 i = firstRoundId; i <= lastRoundId; i++) {
-            (roundIds[i], prices[i], _, timestamps[i], ) = AggregatorV3Interface(aggregator).getRoundData(i);
+            (roundIds[i], prices[i], starttimestamps[i], timestamps[i], ) = AggregatorV3Interface(aggregator).getRoundData(i);
         }
 
         return (roundIds, prices, timestamps);
