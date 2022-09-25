@@ -5,7 +5,7 @@ import { BN, constants, expectEvent, expectRevert, time } from "@openzeppelin/te
 
 const MockERC20 = artifacts.require("./utils/MockERC20.sol");
 const MockRandomNumberGenerator = artifacts.require("./utils/MockRandomNumberGenerator.sol");
-const PancakeSwapLottery = artifacts.require("./PancakeSwapLottery.sol");
+const PancakeSwapLottery = artifacts.require("./WinTnieLottery.sol");
 
 const PRICE_BNB = 400;
 

@@ -7,13 +7,13 @@ import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import "./interfaces/IRandomNumberGenerator.sol";
-import "./interfaces/IPancakeSwapLottery.sol";
+import "./interfaces/IWinTnieLottery.sol";
 
-/** @title PancakeSwap Lottery.
+/** @title WinTnie Lottery.
  * @notice It is a contract for a lottery system using
  * randomness provided externally.
  */
-contract PancakeSwapLottery is ReentrancyGuard, IPancakeSwapLottery, Ownable {
+contract WinTnieLottery is ReentrancyGuard, IWinTnieLottery, Ownable {
     using SafeERC20 for IERC20;
 
     address public injectorAddress;
