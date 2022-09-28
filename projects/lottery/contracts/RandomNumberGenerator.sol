@@ -96,6 +96,6 @@ contract RandomNumberGenerator is VRFConsumerBase, IRandomNumberGenerator, Ownab
     function fulfillRandomness(bytes32 requestId, uint256 randomness) internal override {
         require(latestRequestId == requestId, "Wrong requestId");
         randomResult = uint32(1000000 + (randomness % 1000000));
-        latestLotteryId = IWinTnieLottery(pancakeSwapLottery).viewCurrentLotteryId();
+        latestLotteryId = IWinTnieLottery(wintnieLottery).viewCurrentLotteryId();
     }
 }

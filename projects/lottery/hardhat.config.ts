@@ -26,7 +26,7 @@ const config: HardhatUserConfig = {
       gas: 120000000,
       blockGasLimit: 0x1fffffffffffff,
     },
-    // testnet: bscTestnet,
+    testnet: bscTestnet,
     // mainnet: bscMainnet,
   },
   solidity: {

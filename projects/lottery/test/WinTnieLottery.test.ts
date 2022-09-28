@@ -5,7 +5,7 @@ import { BN, constants, expectEvent, expectRevert, time } from "@openzeppelin/te
 
 const MockERC20 = artifacts.require("./utils/MockERC20.sol");
 const MockRandomNumberGenerator = artifacts.require("./utils/MockRandomNumberGenerator.sol");
-const PancakeSwapLottery = artifacts.require("./WinTnieLottery.sol");
+const WinTnieLottery = artifacts.require("./WinTnieLottery.sol");
 
 const PRICE_BNB = 400;
 
@@ -19,7 +19,7 @@ function gasToUSD(gas: number, gwei: number = 5, priceBNB: number = PRICE_BNB) {
   return num.toFixed(2);
 }
 
-contract("Lottery V2", ([alice, bob, carol, david, erin, operator, treasury, injector]) => {
+contract("WinTnie Lottery", ([alice, bob, carol, david, erin, operator, treasury, injector]) => {
   // VARIABLES
   const _totalInitSupply = parseEther("10000");
 
