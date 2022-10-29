@@ -2,11 +2,11 @@
 
 ## Description
 
-A lottery for CAKE tokens built with Chainlink's VRF.
+A lottery for [TBD] tokens built with Chainlink's VRF.
 
 ### Deployed address
-#### 26 September 2022
-| Details                            |                                            |
+#### 30 October 2022
+| **Details**                        | **Address**                                    |
 |------------------------------------|:-------------------------------------------|
-| RandomNumberGenerator deployed to: | 0xCb5AEdc1BC0794fccc732443f78C35f9b4B9F019 |
-| WinTnieLottery deployed to:        | 0x2510D6083Fa5927ed2472b34A1ABEF600D409c98 | 
+| RandomNumberGenerator deployed to: | 0x7b79e7bcE37af03319536A99E032ac55D1BEAF56 |
+| WinTnieLottery deployed to:        | 0x6056404324b64C078cb9AD961892140fCC5ae920 | 
